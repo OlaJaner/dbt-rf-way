@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: rf_way
+    database: raw
+    schema: rf_way
+    tables:
+      - name: invoices
+      - name: invoicelines
+      - name: buyinggroups
+      - name: customers
+      - name: customercategories
