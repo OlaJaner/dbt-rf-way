@@ -1,7 +1,7 @@
 {{
     config(
         materialized="incremental",
-        unique_key="customer_key",
+        unique_key="invoiceline_key",
         incremental_strategy="merge",
     )
 }}
@@ -39,6 +39,7 @@ select
     i.customerid,
     i.orderid,
     il.invoicelineid,
+    il.invoiceline_key,
     il.stockitemid,
     il.description,
     il.quantity,
@@ -46,6 +47,8 @@ select
     il.taxrate,
     il.taxamount,
     il.lineprofit,
-    il.extendedprice
+    il.extendedprice,
+    --il.lasteditedwhen,
+    il.triggertime
 from invoices as i
 left join invoicelines as il on il.invoice_f_key = i.invoice_key

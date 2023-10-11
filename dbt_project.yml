@@ -37,5 +37,7 @@ models:
       +materialized: table
     intermediate:
       +materialized: view
+      +transient: false # make them permanent tables (snowflake specific)
     mart:
       +materialized: table
+      +transient: false
