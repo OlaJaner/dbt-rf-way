@@ -12,6 +12,10 @@
     {% elif env_var('DBT_MY_ENV') in ['prod', 'test']%}
 
         {{custom_schema_name | trim }}
+    
+    {% elif env_var('DBT_MY_ENV') in ['default']%}
+
+        {{ default_schema }}
 
     {%- else -%}
 
