@@ -5,6 +5,7 @@
     )
 }}
 -- always appends new data
+--ci/cd-test
 select
     *,
     {{ trigger_time_stockholm_time_zone()}} as TriggerTime --call macro
