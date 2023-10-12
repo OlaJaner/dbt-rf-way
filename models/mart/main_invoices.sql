@@ -52,4 +52,4 @@ select
     il.triggertime
 from invoices as i
 left join invoicelines as il on il.invoice_f_key = i.invoice_key
--- ci_cd_2
+-- ci_slim_test
