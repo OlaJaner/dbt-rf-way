@@ -39,9 +39,12 @@ models:
   rf_way:
     staging:
       +materialized: table
+      +schema: stg
     intermediate:
       +materialized: view
       +transient: false # make them permanent tables (snowflake specific)
+      +schema: datastore
     mart:
       +materialized: table
       +transient: false
+      +schema: mart
