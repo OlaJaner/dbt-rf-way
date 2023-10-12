@@ -9,6 +9,10 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 
+vars:
+  # The `TriggerTime` variable will be accessible in all resources
+  TriggerTime: '2023-10-12T12:00:00'
+
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -35,9 +39,12 @@ models:
   rf_way:
     staging:
       +materialized: table
+      +schema: stg
     intermediate:
       +materialized: view
       +transient: false # make them permanent tables (snowflake specific)
+      +schema: datastore
     mart:
       +materialized: table
       +transient: false
+      +schema: mart
