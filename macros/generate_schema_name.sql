@@ -9,11 +9,11 @@
         -- then we just want customer_schema_name
     
     --{% elif target.name in ['prod', 'test']%}
-    {% elif env_var('DBT_MY_ENV') in ['prod', 'test']%}
+    {% elif env_var('DBT_MY_ENV') in ['prod']%}
 
         {{custom_schema_name | trim }}
     
-    {% elif env_var('DBT_MY_ENV') in ['default']%}
+    {% elif env_var('DBT_MY_ENV') in ['default', 'test']%}
 
         {{ default_schema }}
 
