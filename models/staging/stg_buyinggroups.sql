@@ -1,10 +1,3 @@
-{{
-    config(
-        materialized="incremental",
-        incremental_strategy="append",
-    )
-}}
--- always appends new data
 select
     *,
     --'{{ var('TriggerTime')}}' as TriggerTime
