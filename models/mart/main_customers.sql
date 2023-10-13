@@ -14,45 +14,57 @@
 with
     customers as (
         select
-            -- key
             customer_key,
             -- attributes
             customerid,
             customername,
             billtocustomerid,
             customercategoryid,
-            buyinggroupid,
-            primarycontactpersonid,
-            alternatecontactpersonid,
+            case
+                when buyinggroupid = 'NULL' then null else buyinggroupid
+            end as buyinggroupid,
+            -- primarycontactpersonid,
+            -- alternatecontactpersonid,
             deliverymethodid,
             deliverycityid,
             postalcityid,
-            creditlimit,
-            accountopeneddate,
-            standarddiscountpercentage,
-            isstatementsent,
-            isoncredithold,
-            paymentdays,
-            phonenumber,
-            faxnumber,
-            deliveryrun,
-            runposition,
+            -- creditlimit,
+            -- accountopeneddate,
+            -- standarddiscountpercentage,
+            -- isstatementsent,
+            -- isoncredithold,
+            -- paymentdays,
+            -- phonenumber,
+            -- faxnumber,
+            -- deliveryrun,
+            -- runposition,
             websiteurl,
-            deliveryaddressline1,
-            deliveryaddressline2,
+            -- deliveryaddressline1,
+            -- deliveryaddressline2,
             deliverypostalcode,
             deliverylocation,
-            postaladdressline1,
-            postaladdressline2,
+            -- postaladdressline1,
+            -- postaladdressline2,
             postalpostalcode,
-            lasteditedby,
-            validfrom,
-            validto,
+            -- lasteditedby,
+            -- validfrom,
+            -- validto,
             triggertime
         from {{ ref("datastore_customers") }}
         {% if is_incremental() %}
             where triggertime = ({{ max_trigger_time }})
         {% endif %}
+    ),
+    customercategories as (select * from {{ ref("datastore_customercategories") }}),
+    buyinggroups as (select * from {{ ref("datastore_buyinggroups") }}),
+    joined as (
+
+        select c.*, cc.customercategoryname, bg.buyinggroupname
+        from customers as c
+        left join
+            customercategories as cc on cc.customercategoryid = c.customercategoryid
+        left join buyinggroups as bg on bg.buyinggroupid = c.buyinggroupid
     )
+
 select *
-from customers
+from joined

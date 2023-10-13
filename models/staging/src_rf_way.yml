@@ -12,3 +12,4 @@ sources:
       - name: buyinggroups
       - name: customers
       - name: customercategories
+      - name: packagetypes
