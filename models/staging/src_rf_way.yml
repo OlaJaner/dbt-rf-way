@@ -13,3 +13,5 @@ sources:
       - name: customers
       - name: customercategories
       - name: packagetypes
+      - name: people 
+      
