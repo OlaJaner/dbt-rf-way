@@ -1,10 +1,3 @@
--- always appends new data
-{{
-    config(
-        materialized="incremental",
-        incremental_strategy="append",
-    )
-}}
 select
    *,
    {{ trigger_time_stockholm_time_zone()}} as TriggerTime --call macro
